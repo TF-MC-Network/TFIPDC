@@ -8,7 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	
-	public static JavaPlugin plugin = null;
+	public static Main plugin;
+	//allows reference to main class for later integration
 	
 	@Override
 	public void onEnable() {

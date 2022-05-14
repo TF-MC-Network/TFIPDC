@@ -34,48 +34,27 @@ public class DamageThing implements Listener {
 			return;
 		
 		//determines resVal(resistanceValue) based on the blast resistance of a block
-		double resVal=0;
-		if (eventBlock.getBlockData().getMaterial().getBlastResistance() <= 1)
-			resVal=0.50;
+		double resVal=eventBlock.getBlockData().getMaterial().getBlastResistance();
+		double resComp=0;
 		
-		if ((eventBlock.getBlockData().getMaterial().getBlastResistance() > 1) && (eventBlock.getBlockData().getMaterial().getBlastResistance() <= 9))
-			resVal=0.75;
-		
-		if (eventBlock.getBlockData().getMaterial().getBlastResistance() > 9)
+		if (resVal <= 1)
+			resComp=0.50;
+		if ((resVal > 1) && (resVal <= 9))
+			resComp=0.75;
+		if (resVal > 9)
 			return;
 		
 		//randomizes outcome of projectile impact based on the resVal determined previously
-		if (Math.random() >= resVal)
+		if (Math.random() >= resComp)
 			eventBlock.setType(Material.AIR);
 		
 		return;
-		
 	}
 	
-	
-	
-	/*
-	HashMap<String, Boolean> blocks = new HashMap<String, Boolean>();
-	blocks.put("Stone", true);
-	
-	if(block.isDestructable(blocks.get("stone"))) {
-		continue;
-	}
-	*/
-	
-	
-	//Blacklist for blocks that we want to be considered indestructible to PDC fire later
-	//currently unused
 	public static boolean PdcBlackListCheck(Block blk) {
-		
-		if(blk.getType()== Material.BEDROCK)
+		if(blk.getType() == Material.BEDROCK)
 			return true;
 		
 		return false;
 	}
-	
-	
-	
-	
-	
 }
